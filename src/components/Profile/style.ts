@@ -10,6 +10,7 @@ export const ProfileContainer = styled.div`
   box-shadow: 0px 2px 28px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin-top: -3rem;
+  margin-bottom: 5rem;
   position: relative;
 
   img {
@@ -22,7 +23,6 @@ export const ProfileContainer = styled.div`
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
     justify-content: center;
-    margin: 0 10vw;
   }
 `
 
@@ -72,10 +72,11 @@ export const TagsContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 1.75rem;
 
   @media (max-width: 900px) {
-    flex-direction: column;
+    justify-content: center;
   }
 `
 

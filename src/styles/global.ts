@@ -16,15 +16,15 @@ export const GlobalStyle = createGlobalStyle`
 
     h1,h2{
         font-weight: 700;
-        color: ${(props) => props.theme['base-title']};
     }
 
     h1{
         font-size: 1.75rem;
         line-height: 130%;
+        color: ${(props) => props.theme['base-title']};
     }
 
-    h2{
+    h2,h3{
         font-size: 1.5rem;
         line-height: 160%;
     }
