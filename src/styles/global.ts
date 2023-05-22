@@ -51,4 +51,10 @@ export const GlobalStyle = createGlobalStyle`
     a{
         cursor: pointer;
     }
+
+    span{
+        font-size: 0.75rem;
+        line-height: 160%;
+        color: ${(props) => props.theme['base-span']};
+    }
 `

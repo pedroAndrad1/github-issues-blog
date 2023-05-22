@@ -24,4 +24,6 @@ export const FilterInput = styled.input`
   border-radius: 6px;
   width: 100%;
   color: ${(props) => props.theme['base-text']};
+
+  margin-bottom: 3rem;
 `
