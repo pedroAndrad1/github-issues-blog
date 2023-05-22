@@ -10,7 +10,28 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background-color: ${(props) => props.theme.background} ;
+        background-color: ${(props) => props.theme['base-background']};
+        font-family: 'Nunito', 'arial';
+    }
+
+    h1,h2{
+        font-weight: 700;
+        color: ${(props) => props.theme['base-title']};
+    }
+
+    h1{
+        font-size: 1.75rem;
+        line-height: 130%;
+    }
+
+    h2{
+        font-size: 1.5rem;
+        line-height: 160%;
+    }
+
+    p{
+        line-height: 160%;
+        color: ${(props) => props.theme['base-text']};
     }
 
     button{
@@ -20,5 +41,14 @@ export const GlobalStyle = createGlobalStyle`
         &:disabled{
             cursor: not-allowed ;
         }
+    }
+
+    svg {
+        margin: auto 0;
+        fill: ${(props) => props.theme['base-label']};
+    }
+
+    a{
+        cursor: pointer;
     }
 `
