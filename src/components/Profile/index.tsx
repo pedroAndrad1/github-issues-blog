@@ -1,3 +1,4 @@
+import { useGithubContext } from '../../contexts/GitHubContext/useGithubContext'
 import {
   Content,
   GithubLink,
@@ -8,34 +9,31 @@ import {
 import { FaBuilding, FaGithub, FaUserFriends, FaLink } from 'react-icons/fa'
 
 export const Profile = () => {
+  const { user } = useGithubContext()
   return (
     <ProfileContainer>
-      <img
-        src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg"
-        alt="Foto de perfil"
-      />
+      <img src={user?.avatarUrl} alt="Foto de perfil" />
       <Content>
-        <h1>Titulo</h1>
+        <h1>{user?.name}</h1>
         <GithubLink>
-          <a>Github</a>
+          <a href={user?.htmlUrl} target="_blank" rel="noreferrer">
+            Github
+          </a>
           <FaLink />
         </GithubLink>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adip sapient et dolore mag et
-          dolore mag et dolore mag et dolore mag et
-        </p>
+        <p>{user?.bio}</p>
         <TagsContainer>
           <Tags>
             <FaGithub />
-            <span>PedroAndrad1</span>
+            <span>{user?.login}</span>
           </Tags>
           <Tags>
             <FaBuilding />
-            <span>ED Company</span>
+            <span>{user?.company}</span>
           </Tags>
           <Tags>
             <FaUserFriends />
-            <span>xx seguidores</span>
+            <span>{user?.followers} seguidores</span>
           </Tags>
         </TagsContainer>
       </Content>
