@@ -26,4 +26,10 @@ export const FilterInput = styled.input`
   color: ${(props) => props.theme['base-text']};
 
   margin-bottom: 3rem;
+
+  &:active,
+  &:focus-visible {
+    outline: none;
+    border: 1px solid ${(props) => props.theme.blue};
+  }
 `

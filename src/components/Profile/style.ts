@@ -50,6 +50,7 @@ export const GithubLink = styled.div`
   position: absolute;
   right: 30px;
   top: 30px;
+  padding-bottom: 2px;
 
   a {
     font-weight: 700;
@@ -61,6 +62,10 @@ export const GithubLink = styled.div`
 
   svg {
     fill: ${(props) => props.theme.blue};
+  }
+
+  &:hover {
+    border-bottom: 1px solid ${(props) => props.theme.blue};
   }
 
   @media (max-width: 400px) {
