@@ -1,9 +1,9 @@
 import {
   Content,
+  GithubLink,
   ProfileContainer,
   Tags,
   TagsContainer,
-  TitleContainer,
 } from './style'
 import { FaBuilding, FaGithub, FaUserFriends, FaLink } from 'react-icons/fa'
 
@@ -15,13 +15,11 @@ export const Profile = () => {
         alt="Foto de perfil"
       />
       <Content>
-        <TitleContainer>
-          <h1>Titulo</h1>
-          <div>
-            <a>Github</a>
-            <FaLink />
-          </div>
-        </TitleContainer>
+        <h1>Titulo</h1>
+        <GithubLink>
+          <a>Github</a>
+          <FaLink />
+        </GithubLink>
         <p>
           Lorem ipsum dolor sit amet, consectetur adip sapient et dolore mag et
           dolore mag et dolore mag et dolore mag et
