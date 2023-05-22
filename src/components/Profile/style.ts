@@ -62,6 +62,10 @@ export const GithubLink = styled.div`
   svg {
     fill: ${(props) => props.theme.blue};
   }
+
+  @media (max-width: 400px) {
+    top: 15px;
+  }
 `
 
 export const TagsContainer = styled.div`
