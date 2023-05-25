@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable camelcase */
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
 import { api } from '../../lib/axios'
 import { BLOG_REPO_NAME, USER_NAME } from '../../constants'
-import { Issue, UserData } from '../../models'
+import { Issue, IssueDetalhe, UserData } from '../../models'
 
 interface GithubContextData {
   user: UserData | undefined
   issues: Issue[]
   totalIssues: number
   getIssues: (query?: string) => void
-  getIssue: (number: number) => void
+  getIssue: (number: string) => Promise<IssueDetalhe>
 }
 
 interface GithubContextProps {
@@ -48,8 +54,8 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
       )
   }
 
-  const getIssues = async (query = '') => {
-    await api
+  const getIssues = (query = '') => {
+    api
       .get('search/issues', {
         params: {
           q: `${query} repo:${USER_NAME}/${BLOG_REPO_NAME}`,
@@ -74,11 +80,25 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
       })
   }
 
-  const getIssue = async (number: number) => {
-    return await api
-      .get(`repos/${USER_NAME}/${BLOG_REPO_NAME}/issues/${number}`)
-      .then((res) => console.log(res))
-  }
+  const getIssue = useCallback(
+    (number: string) =>
+      api
+        .get(`repos/${USER_NAME}/${BLOG_REPO_NAME}/issues/${number}`)
+        .then(({ data }) => {
+          const diffTimeMs = Math.abs(
+            new Date().getTime() - new Date(data.created_at).getTime(),
+          )
+          const createdAgo = Math.round(diffTimeMs / (1000 * 60 * 60 * 24))
+          return {
+            author: data.user.login,
+            createdAgo,
+            commentsAmount: data.comments,
+            body: data.body,
+            url: data.url,
+          } as IssueDetalhe
+        }),
+    [],
+  )
 
   return (
     <GithubContext.Provider

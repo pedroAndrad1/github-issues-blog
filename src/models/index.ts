@@ -14,3 +14,11 @@ export interface UserData {
   login: string
   name: string
 }
+
+export interface IssueDetalhe {
+  author: string
+  createdAgo: number
+  commentsAmount: number
+  body: string
+  url: string
+}
