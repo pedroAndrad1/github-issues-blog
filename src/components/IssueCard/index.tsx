@@ -1,21 +1,26 @@
+import { Issue } from '../../models'
 import { Card } from './style'
 
-export const IssueCard = () => {
+interface IssueCardProps {
+  issue: Issue
+}
+
+export const IssueCard = ({
+  issue: { title, body, createdAgo },
+}: IssueCardProps) => {
   return (
     <Card>
       <div>
-        <h3>Titulo da Issue</h3>
-        <span>Há X dia/s</span>
+        <h3>{title}</h3>
+        {createdAgo < 1 ? (
+          <span>Hoje</span>
+        ) : createdAgo === 1 ? (
+          <span>Há {createdAgo} dia</span>
+        ) : (
+          <span>Há {createdAgo} dia/s</span>
+        )}
       </div>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod explicabo
-        aliquid, numquam omnis aperiam adipisci suscipit architecto culpa
-        accusamus inventore, sed perferendis facere voluptates aut dolorum
-        dignissimos ea? Odit, minus? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Culpa modi similique eaque dignissimos soluta ullam
-        quibusdam voluptatum delectus, ab numquam nobis iste harum ut. Optio
-        architecto adipisci ipsum esse eaque?
-      </p>
+      <p>{body}</p>
     </Card>
   )
 }

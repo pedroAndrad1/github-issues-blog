@@ -6,7 +6,7 @@ export const IssueCardsContainer = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 1rem;
-
+  margin-bottom: 3rem;
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }

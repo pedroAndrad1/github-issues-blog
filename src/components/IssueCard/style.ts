@@ -4,7 +4,7 @@ export const Card = styled.div`
   border-radius: 10px;
   background-color: ${(props) => props.theme['base-post']};
   border: 1px solid ${(props) => props.theme['base-post']};
-  max-height: 216px;
+  max-height: 250px;
   padding: 1.75rem;
   cursor: pointer;
 
@@ -31,6 +31,6 @@ export const Card = styled.div`
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* start showing ellipsis when 4rd line is reached */
+    -webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
   }
 `
