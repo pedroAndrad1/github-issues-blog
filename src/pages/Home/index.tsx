@@ -5,6 +5,7 @@ import { IssueCard } from '../../components/IssueCard'
 import { Profile } from '../../components/Profile'
 import { useGithubContext } from '../../contexts/GitHubContext/useGithubContext'
 import { IssueCardsContainer } from './style'
+import { Link } from 'react-router-dom'
 
 export const Home = () => {
   const { issues } = useGithubContext()
@@ -17,7 +18,9 @@ export const Home = () => {
         <Filter />
         <IssueCardsContainer>
           {issues.map((issue, i) => (
-            <IssueCard issue={issue} key={`${i}_Isse_Card`} />
+            <Link to={`${issue.number}`} key={`${i}_Isse_Card`}>
+              <IssueCard issue={issue} />
+            </Link>
           ))}
         </IssueCardsContainer>
       </Container>

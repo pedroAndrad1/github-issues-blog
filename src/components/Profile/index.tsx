@@ -1,17 +1,14 @@
 import { useGithubContext } from '../../contexts/GitHubContext/useGithubContext'
-import {
-  Content,
-  GithubLink,
-  ProfileContainer,
-  Tags,
-  TagsContainer,
-} from './style'
+import { MainCard } from '../MainCard'
+import { TagItem } from '../Tags/TagItem'
+import { TagsContainer } from '../Tags/TagsContainer'
+import { Content, GithubLink } from './style'
 import { FaBuilding, FaGithub, FaUserFriends, FaLink } from 'react-icons/fa'
 
 export const Profile = () => {
   const { user } = useGithubContext()
   return (
-    <ProfileContainer>
+    <MainCard columns={2}>
       <img src={user?.avatarUrl} alt="Foto de perfil" />
       <Content>
         <h1>{user?.name}</h1>
@@ -23,20 +20,20 @@ export const Profile = () => {
         </GithubLink>
         <p>{user?.bio}</p>
         <TagsContainer>
-          <Tags>
+          <TagItem>
             <FaGithub />
             <span>{user?.login}</span>
-          </Tags>
-          <Tags>
+          </TagItem>
+          <TagItem>
             <FaBuilding />
             <span>{user?.company}</span>
-          </Tags>
-          <Tags>
+          </TagItem>
+          <TagItem>
             <FaUserFriends />
             <span>{user?.followers} seguidores</span>
-          </Tags>
+          </TagItem>
         </TagsContainer>
       </Content>
-    </ProfileContainer>
+    </MainCard>
   )
 }

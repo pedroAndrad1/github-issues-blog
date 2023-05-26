@@ -93,8 +93,9 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
             author: data.user.login,
             createdAgo,
             commentsAmount: data.comments,
+            title: data.title,
             body: data.body,
-            url: data.url,
+            url: data.html_url,
           } as IssueDetalhe
         }),
     [],

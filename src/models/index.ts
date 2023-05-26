@@ -19,6 +19,7 @@ export interface IssueDetalhe {
   author: string
   createdAgo: number
   commentsAmount: number
+  title: string
   body: string
   url: string
 }
