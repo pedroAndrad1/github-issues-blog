@@ -35,3 +35,7 @@ export const Navigation = styled.nav`
 export const Title = styled.h1`
   margin-bottom: 0.5rem;
 `
+export const ContentCard = styled.div`
+  padding: 1rem;
+  margin-top: 2rem;
+`
