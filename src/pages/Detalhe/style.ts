@@ -38,4 +38,8 @@ export const Title = styled.h1`
 export const ContentCard = styled.div`
   padding: 1rem;
   margin-top: 2rem;
+
+  img {
+    max-width: 100%;
+  }
 `

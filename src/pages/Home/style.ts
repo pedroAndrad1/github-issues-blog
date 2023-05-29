@@ -11,3 +11,13 @@ export const IssueCardsContainer = styled.div`
     grid-template-columns: 1fr;
   }
 `
+export const LoadingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`
+export const NoIssuesOrError = styled.p`
+  text-align: center;
+  margin-bottom: 5rem;
+`

@@ -4,7 +4,7 @@ export const Card = styled.div`
   border-radius: 10px;
   background-color: ${(props) => props.theme['base-post']};
   border: 1px solid ${(props) => props.theme['base-post']};
-  max-height: 250px;
+  height: 250px;
   padding: 1.75rem;
   cursor: pointer;
 

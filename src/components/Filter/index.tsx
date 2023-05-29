@@ -1,8 +1,21 @@
+import { ChangeEvent, useState } from 'react'
 import { useGithubContext } from '../../contexts/GitHubContext/useGithubContext'
+import { useDebounce } from '../../hooks/useDebounce'
 import { FilterHeader, FilterInput } from './style'
 
-export const Filter = () => {
+interface FilterProps {
+  onChange: (text: string) => void
+}
+
+export const Filter = ({ onChange }: FilterProps) => {
   const { totalIssues } = useGithubContext()
+  const { debounce } = useDebounce()
+  const [inputText, setInputText] = useState('')
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputText(event.target.value)
+    debounce(1000, onChange, event.target.value)
+  }
 
   return (
     <>
@@ -15,7 +28,11 @@ export const Filter = () => {
         )}
       </FilterHeader>
       <form>
-        <FilterInput />
+        <FilterInput
+          value={inputText}
+          onChange={(e) => handleChange(e)}
+          placeholder="Filtre por parte do título ou parte do texto da pulicação"
+        />
       </form>
     </>
   )

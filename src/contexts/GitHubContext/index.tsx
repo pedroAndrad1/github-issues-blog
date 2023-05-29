@@ -15,7 +15,7 @@ interface GithubContextData {
   user: UserData | undefined
   issues: Issue[]
   totalIssues: number
-  getIssues: (query?: string) => void
+  getIssues: (query?: string) => Promise<void | Error>
   getIssue: (number: string) => Promise<IssueDetalhe>
 }
 
@@ -36,7 +36,7 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
   }, [])
 
   const loadUser = async () => {
-    await api
+    return api
       .get(`/users/${USER_NAME}`)
       .then(
         ({
@@ -54,16 +54,16 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
       )
   }
 
-  const getIssues = (query = '') => {
-    api
+  const getIssues = async (query = '') => {
+    return api
       .get('search/issues', {
         params: {
           q: `${query} repo:${USER_NAME}/${BLOG_REPO_NAME}`,
         },
       })
-      .then(({ data: { items, total_count } }) => {
-        setTotalIssues(total_count)
-        const formattedIssues = (items as []).map((rawIssue: any) => {
+      .then((res) => {
+        setTotalIssues(res.data.total_count)
+        const formattedIssues = (res.data.items as []).map((rawIssue: any) => {
           const diffTimeMs = Math.abs(
             new Date().getTime() - new Date(rawIssue.created_at).getTime(),
           )
@@ -78,10 +78,11 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
         })
         setIssues(formattedIssues)
       })
+      .catch((err) => new Error(err))
   }
 
   const getIssue = useCallback(
-    (number: string) =>
+    async (number: string) =>
       api
         .get(`repos/${USER_NAME}/${BLOG_REPO_NAME}/issues/${number}`)
         .then(({ data }) => {
