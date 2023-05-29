@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { fadeInAnimation } from '../../styles/animations'
 
 export const Card = styled.div`
   border-radius: 10px;
@@ -7,6 +8,7 @@ export const Card = styled.div`
   height: 250px;
   padding: 1.75rem;
   cursor: pointer;
+  animation: ${fadeInAnimation} 0.5s;
 
   &:hover {
     border: 1px solid ${(props) => props.theme['base-label']};

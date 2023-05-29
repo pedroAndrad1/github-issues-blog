@@ -1,4 +1,5 @@
 import { css, styled } from 'styled-components'
+import { fadeInAnimation } from '../../styles/animations'
 
 interface MainCardProps {
   columns: 1 | 2
@@ -23,6 +24,7 @@ export const MainCard = styled.div<MainCardProps>`
   margin-top: -3rem;
   margin-bottom: 5rem;
   position: relative;
+  animation: ${fadeInAnimation} 0.5s;
 
   img {
     width: 148px;
