@@ -15,7 +15,7 @@ interface GithubContextData {
   user: UserData | undefined
   issues: Issue[]
   totalIssues: number
-  getIssues: (query?: string) => Promise<void | Error>
+  getIssues: (query?: string) => Promise<void>
   getIssue: (number: string) => Promise<IssueDetalhe>
 }
 
@@ -78,7 +78,9 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
         })
         setIssues(formattedIssues)
       })
-      .catch((err) => new Error(err))
+      .catch((err) => {
+        throw new Error(err)
+      })
   }
 
   const getIssue = useCallback(
@@ -98,6 +100,9 @@ export const GithubContextProvider = ({ children }: GithubContextProps) => {
             body: data.body,
             url: data.html_url,
           } as IssueDetalhe
+        })
+        .catch((err) => {
+          throw new Error(err)
         }),
     [],
   )

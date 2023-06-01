@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { useGithubContext } from '../../contexts/GitHubContext/useGithubContext'
 import { IssueDetalhe } from '../../models'
 import { MainCard } from '../../components/MainCard'
-import { ContentCard, Navigation, Title } from './style'
+import { ContentCard, ErrorMessage, Navigation, Title } from './style'
 import { TagsContainer } from '../../components/Tags/TagsContainer'
 import { TagItem } from '../../components/Tags/TagItem'
 import {
@@ -26,59 +26,65 @@ export const Detalhe = () => {
 
   useEffect(() => {
     getIssue(number as string)
-      .then((res) => setIssue(res))
+      .then((res) => {
+        console.log(res)
+        setIssue(res)
+      })
       .catch(() => setErro(true))
   }, [getIssue, number])
 
   return (
     <>
       <Header />
-      <Container>
-        {!erro ? (
-          <>
-            <MainCard columns={1}>
-              <Navigation>
-                <div>
-                  <FaAngleLeft />
-                  <Link to="/">Voltar</Link>
-                </div>
-                <div>
-                  <a href={issue?.url} target="_blank" rel="noreferrer">
-                    Ver no Github
-                  </a>
-                  <FaLink />
-                </div>
-              </Navigation>
-              <Title>{issue?.title}</Title>
-              <TagsContainer>
-                <TagItem>
-                  <FaGithub />
-                  <span>{issue?.author}</span>
-                </TagItem>
-                <TagItem>
-                  <FaCalendarDay />
-                  {issue && issue.createdAgo < 1 ? (
-                    <span>Criado hoje</span>
-                  ) : issue?.createdAgo === 1 ? (
-                    <span>Criado há {issue.createdAgo} dia</span>
-                  ) : (
-                    <span>Criado há {issue?.createdAgo} dias</span>
-                  )}
-                </TagItem>
-                <TagItem>
-                  <FaComment />
-                  <span>{issue?.commentsAmount}</span>
-                </TagItem>
-              </TagsContainer>
-            </MainCard>
-            <ContentCard>
-              {issue && <ReactMarkdown children={issue.body}></ReactMarkdown>}
-            </ContentCard>
-          </>
-        ) : (
-          <div>Erro</div>
-        )}
-      </Container>
+      {!erro ? (
+        <Container>
+          <MainCard columns={1}>
+            <Navigation>
+              <div>
+                <FaAngleLeft />
+                <Link to="/">Voltar</Link>
+              </div>
+              <div>
+                <a href={issue?.url} target="_blank" rel="noreferrer">
+                  Ver no Github
+                </a>
+                <FaLink />
+              </div>
+            </Navigation>
+            <Title>{issue?.title}</Title>
+            <TagsContainer>
+              <TagItem>
+                <FaGithub />
+                <span>{issue?.author}</span>
+              </TagItem>
+              <TagItem>
+                <FaCalendarDay />
+                {issue && issue.createdAgo < 1 ? (
+                  <span>Criado hoje</span>
+                ) : issue?.createdAgo === 1 ? (
+                  <span>Criado há {issue.createdAgo} dia</span>
+                ) : (
+                  <span>Criado há {issue?.createdAgo} dias</span>
+                )}
+              </TagItem>
+              <TagItem>
+                <FaComment />
+                <span>{issue?.commentsAmount}</span>
+              </TagItem>
+            </TagsContainer>
+          </MainCard>
+          <ContentCard>
+            {issue && <ReactMarkdown children={issue.body}></ReactMarkdown>}
+          </ContentCard>
+        </Container>
+      ) : (
+        <ErrorMessage>
+          <p>
+            Ocorreu um erro de comunicação. Por favor, tente novamente mais
+            tarde.
+          </p>
+        </ErrorMessage>
+      )}
     </>
   )
 }

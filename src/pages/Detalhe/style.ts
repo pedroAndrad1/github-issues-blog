@@ -43,3 +43,20 @@ export const ContentCard = styled.div`
     max-width: 100%;
   }
 `
+export const ErrorMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => props.theme['base-text']};
+  font-size: 1.5rem;
+  padding: 1rem;
+  margin-top: 25%;
+
+  p {
+    text-align: center;
+  }
+
+  @media (max-width: 400px) {
+    margin-top: 100%;
+  }
+`

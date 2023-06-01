@@ -17,12 +17,9 @@ export const Home = () => {
 
   const onChange = (text: string) => {
     setLoading(true)
-    getIssues(text).then((err) => {
-      if (err) {
-        setErro(true)
-      }
-      setLoading(false)
-    })
+    getIssues(text)
+      .catch(() => setErro(true))
+      .finally(() => setLoading(false))
   }
 
   return (
@@ -40,7 +37,7 @@ export const Home = () => {
             ) : (
               <IssueCardsContainer>
                 {issues.map((issue, i) => (
-                  <Link to={`${issue.number}`} key={`${i}_Isse_Card`}>
+                  <Link to={`issue/${issue.number}`} key={`${i}_Isse_Card`}>
                     <IssueCard issue={issue} />
                   </Link>
                 ))}
