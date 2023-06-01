@@ -26,10 +26,7 @@ export const Detalhe = () => {
 
   useEffect(() => {
     getIssue(number as string)
-      .then((res) => {
-        console.log(res)
-        setIssue(res)
-      })
+      .then((res) => setIssue(res))
       .catch(() => setErro(true))
   }, [getIssue, number])
 
